@@ -14,7 +14,12 @@
  * limitations under the License.
  */
 
-output "bucket_name" {
-  description = "Name of the bucket"
-  value       = google_storage_bucket.main.name
+output "id" {
+  description = "An identifier for the resource"
+  value       = google_cloud_scheduler_job.job.id
+}
+
+output "state" {
+  description = "State of the job"
+  value       = google_cloud_scheduler_job.job.state
 }

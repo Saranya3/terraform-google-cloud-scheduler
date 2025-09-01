@@ -14,12 +14,13 @@
  * limitations under the License.
  */
 
-variable "project_id" {
-  description = "The ID of the project in which to provision resources."
+# Required variable
+variable "name" {
+  description = "The name of the job"
   type        = string
 }
 
-variable "bucket_name" {
-  description = "The name of the bucket to create."
+variable "project_id" {
+  description = "The project ID to deploy to"
   type        = string
 }

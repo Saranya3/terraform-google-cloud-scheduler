@@ -52,14 +52,25 @@ Functional examples are included in the
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| bucket\_name | The name of the bucket to create | `string` | n/a | yes |
-| project\_id | The project ID to deploy to | `string` | n/a | yes |
+| name | The name of the job. | `string` | n/a | yes |
+| description | A human-readable description for the job. | `string` | n/a | no |
+| schedule | Schedule on which the job will be executed. | `string` | n/a | no |
+| time\_zone | Specifies the time zone to be used in interpreting schedule. | `string` | n/a | no |
+| paused | Sets the job to a paused state. | `boolean` | n/a | no |
+| attempt\_deadline | The deadline for job attempts. | `string` | n/a | no |
+| retry\_config | If a job does not complete successfully, then it will be retried with exponential backoff. | `map` | n/a | no |
+| pubsub\_target | Pub/Sub target If the job providers a Pub/Sub target the cron will publish a message to the provided topic. | `map` | n/a | no |
+| app\_engine\_http\_target | App Engine HTTP target. If the job providers a App Engine HTTP target the cron will send a request to the service instance. | `map` | n/a | no |
+| http\_target | If the job providers a http\_target the cron will send a request to the targeted url. | `map` | n/a | no |
+| location | Region where the scheduler job resides. | `string` | n/a | no |
+| project_id | The project ID to deploy to. | `string` | n/a | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| bucket\_name | Name of the bucket |
+| id | An identifier for the resource. |
+| state | State of the job. |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 

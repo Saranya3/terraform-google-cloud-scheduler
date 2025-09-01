@@ -14,7 +14,12 @@
  * limitations under the License.
  */
 
-output "bucket_name" {
-  description = "The name of the bucket."
-  value       = module.cloud_scheduler.bucket_name
+output "id" {
+  description = "An identifier for the resource"
+  value       = module.cloud_scheduler.id
+}
+
+output "state" {
+  description = "State of the job"
+  value       = module.cloud_scheduler.state
 }

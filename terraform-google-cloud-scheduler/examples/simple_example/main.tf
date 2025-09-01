@@ -17,6 +17,35 @@
 module "cloud_scheduler" {
   source = "../.."
 
-  project_id  = var.project_id
-  bucket_name = var.bucket_name
+  name             = var.name
+  description      = "Sample Cloud scheduler"
+  project          = var.project_id
+  region           = "us-central1"
+  schedule         = "* * * * * *"
+  time_zone        = "UTC"
+  paused           = false
+  attempt_deadline = "15s"
+
+  retry_config = {
+    retry_count = 1
+  }
+
+  pubsub_target = null
+
+  app_engine_http_target = {
+    http_method  = "GET",
+    relative_uri = "/ping",
+    oauth_token = {
+      service_account_email = "test1@projid.iam.gserviceaccount.com"
+    }
+  }
+
+  http_target = {
+    http_method = "POST"
+    uri         = "https://example.com/"
+    body        = base64encode("{\"foo\":\"bar\"}")
+    headers = {
+      "Content-Type" = "application/json"
+    }
+  }
 }
