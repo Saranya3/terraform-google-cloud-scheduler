@@ -7,15 +7,15 @@ This example illustrates how to use the `cloud-scheduler` module.
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| name | The name of the job. | `string` | n/a | yes |
-| project_id | The project ID to deploy to. | `string` | n/a | no |
+| name | The name of the job | `string` | n/a | yes |
+| project\_id | The project ID to deploy to | `string` | n/a | yes |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| id | An identifier for the resource. |
-| state | State of the job. |
+| id | An identifier for the resource |
+| state | State of the job |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 
