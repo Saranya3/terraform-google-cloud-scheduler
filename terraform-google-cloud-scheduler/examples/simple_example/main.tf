@@ -19,9 +19,9 @@ module "cloud_scheduler" {
 
   name             = var.name
   description      = "Sample Cloud scheduler"
-  project          = var.project_id
-  region           = "us-central1"
-  schedule         = "* * * * * *"
+  project_id       = var.project_id
+  location         = "us-central1"
+  schedule         = "*/4 * * * *"
   time_zone        = "UTC"
   paused           = false
   attempt_deadline = "15s"
@@ -35,17 +35,11 @@ module "cloud_scheduler" {
   app_engine_http_target = {
     http_method  = "GET",
     relative_uri = "/ping",
+    app_engine_routing = {service="web", version="local", instance="ins1"},
     oauth_token = {
-      service_account_email = "test1@projid.iam.gserviceaccount.com"
+      service_account_email = "ci-account@${var.project_id}.iam.gserviceaccount.com"
     }
   }
 
-  http_target = {
-    http_method = "POST"
-    uri         = "https://example.com/"
-    body        = base64encode("{\"foo\":\"bar\"}")
-    headers = {
-      "Content-Type" = "application/json"
-    }
-  }
+  http_target = null
 }

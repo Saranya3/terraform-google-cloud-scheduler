@@ -22,3 +22,9 @@ output "sa_key" {
   value     = google_service_account_key.int_test.private_key
   sensitive = true
 }
+
+output "name" {
+  description = "A unique name for the Cloud Scheduler job in tests."
+  value       = "integration-test-cloud-scheduler"
+}
+
