@@ -70,7 +70,7 @@ resource "google_cloud_scheduler_job" "job" {
         body = http_target.value["body"]
 
         dynamic "oidc_token" {
-          for_each = http_target.value["oidc_token"]
+          for_each = http_target.value["oidc_token"][*]
           content {
             service_account_email = oidc_token.value["service_account_email"]
             audience = oidc_token.value["audience"]

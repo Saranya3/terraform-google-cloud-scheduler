@@ -29,17 +29,12 @@ module "cloud_scheduler" {
   retry_config = {
     retry_count = 1
   }
-
-  pubsub_target = null
-
-  app_engine_http_target = {
-    http_method  = "GET",
-    relative_uri = "/ping",
-    app_engine_routing = {service="web", version="local", instance="ins1"},
-    oauth_token = {
-      service_account_email = "ci-account@${var.project_id}.iam.gserviceaccount.com"
-    }
+  pubsub_target = {
+    topic_name = "projects/${var.project_id}/topics/topic_id"
+    data       = base64encode("test")
   }
+
+  app_engine_http_target = null
 
   http_target = null
 }

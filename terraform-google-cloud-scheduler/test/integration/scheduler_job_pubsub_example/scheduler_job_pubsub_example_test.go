@@ -24,7 +24,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestSimpleExample(t *testing.T) {
+func TestSchedulerJobPubsubExample(t *testing.T) {
 	example := tft.NewTFBlueprintTest(t)
 	projectID := example.GetTFSetupStringOutput("project_id")
 	jobName := example.GetTFSetupStringOutput("name")

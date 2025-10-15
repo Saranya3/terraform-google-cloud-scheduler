@@ -93,7 +93,7 @@ variable "pubsub_target" {
   type        = object({
     topic_name = string
     data       = optional(string)
-    attributes = optional(list(string))
+    attributes = optional(map(string), {})
   })
   default      = null
 }
