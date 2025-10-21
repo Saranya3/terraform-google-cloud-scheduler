@@ -22,9 +22,6 @@ module "cloud_scheduler" {
   project_id       = var.project_id
   location         = "us-central1"
   schedule         = "*/4 * * * *"
-  time_zone        = "UTC"
-  paused           = false
-  attempt_deadline = "15s"
 
   retry_config = {
     retry_count = 1

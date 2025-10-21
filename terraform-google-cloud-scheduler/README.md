@@ -52,16 +52,16 @@ Functional examples are included in the
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
-| app\_engine\_http\_target | App Engine HTTP target. If the job providers a App Engine HTTP target the cron will send a request to the service instance | <pre>object({<br>    http_method = optional(string)<br>    app_engine_routing = optional(object({<br>      service = optional(string)<br>      version = optional(string)<br>      instance = optional(string)<br>    }))<br>    relative_uri = optional(string)<br>    body = optional(string)<br>    headers = optional(object({<br>          name  = string<br>          value = string<br>        }), null)<br>  })</pre> | n/a | yes |
-| attempt\_deadline | The deadline for job attempts | `string` | n/a | yes |
+| app\_engine\_http\_target | App Engine HTTP target. If the job providers a App Engine HTTP target the cron will send a request to the service instance | <pre>object({<br>    http_method = optional(string)<br>    app_engine_routing = optional(object({<br>      service = optional(string)<br>      version = optional(string)<br>      instance = optional(string)<br>    }))<br>    relative_uri = optional(string)<br>    body = optional(string)<br>    headers = optional(object({<br>          name  = string<br>          value = string<br>        }), null)<br>  })</pre> | `null` | no |
+| attempt\_deadline | The deadline for job attempts | `string` | `"15s"` | no |
 | description | A human-readable description for the job | `string` | `null` | no |
 | http\_target | If the job providers a http\_target the cron will send a request to the targeted url | <pre>object({<br>    uri = string<br>    http_method = optional(string)<br>    body = optional(string)<br>    oath_token = optional(object({<br>      service_account_email = string<br>      scope = optional(string)<br>    }))<br>    oidc_token = optional(object({<br>      service_account_email = string<br>      audience = optional(string)<br>    }))<br>  })</pre> | `null` | no |
 | location | Region where the scheduler job resides | `string` | n/a | yes |
 | name | The name of the job | `string` | n/a | yes |
-| paused | Sets the job to a paused state | `bool` | `false` | no |
+| paused | Sets the job to a paused state | `bool` | `true` | no |
 | project\_id | The project ID to deploy to | `string` | n/a | yes |
-| pubsub\_target | Pub/Sub target If the job providers a Pub/Sub target the cron will publish a message to the provided topic | <pre>object({<br>    topic_name = string<br>    data       = optional(string)<br>    attributes = optional(list(string))<br>  })</pre> | `null` | no |
-| retry\_config | If a job does not complete successfully, then it will be retried with exponential backoff | <pre>object({<br>    retry_count          = optional(number)<br>    max_retry_duration   = optional(string)<br>    min_backoff_duration = optional(string)<br>    max_backoff_duration = optional(string)<br>    max_doublings        = optional(number)<br>  })</pre> | n/a | yes |
+| pubsub\_target | Pub/Sub target If the job providers a Pub/Sub target the cron will publish a message to the provided topic | <pre>object({<br>    topic_name = string<br>    data       = optional(string)<br>    attributes = optional(map(string), {})<br>  })</pre> | `null` | no |
+| retry\_config | If a job does not complete successfully, then it will be retried with exponential backoff | <pre>object({<br>    retry_count          = optional(number)<br>    max_retry_duration   = optional(string)<br>    min_backoff_duration = optional(string)<br>    max_backoff_duration = optional(string)<br>    max_doublings        = optional(number)<br>  })</pre> | <pre>{<br>  "retry_count": 0<br>}</pre> | no |
 | schedule | Schedule on which the job will be executed | `string` | n/a | yes |
 | time\_zone | Specifies the time zone to be used in interpreting schedule | `string` | `"UTC"` | no |
 

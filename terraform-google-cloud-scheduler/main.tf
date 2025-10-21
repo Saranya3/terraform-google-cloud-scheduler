@@ -14,6 +14,12 @@
  * limitations under the License.
  */
 
+locals {
+  is_app_engine = var.app_engine_http_target != null
+  is_pubsub     = var.pubsub_target != null
+  is_http       = var.http_target != null
+}
+
 resource "google_cloud_scheduler_job" "job" {
   name                   = var.name
   description            = var.description
@@ -22,7 +28,7 @@ resource "google_cloud_scheduler_job" "job" {
   schedule               = var.schedule
   time_zone              = var.time_zone
   paused                 = var.paused
-  attempt_deadline       = var.attempt_deadline
+  attempt_deadline       = var.pubsub_target != null ? null : var.attempt_deadline
 
   dynamic "retry_config" {
       for_each = var.retry_config[*]
@@ -77,5 +83,16 @@ resource "google_cloud_scheduler_job" "job" {
           }
         }
       }
+  }
+}
+
+resource "null_resource" "one_of_required" {
+  lifecycle {
+    precondition {
+      # This condition sums the boolean flags (true=1, false=0).
+      # The check for '== 1' ensures that exactly one of them is true.
+      condition     = (local.is_app_engine ? 1 : 0) + (local.is_pubsub ? 1 : 0) + (local.is_http ? 1 : 0) == 1
+      error_message = "Exactly one of the variables (app_engine_http_target, pubsub_target, or http_target) must be set."
+    }
   }
 }

@@ -35,9 +35,11 @@ variable "schedule" {
   type        = string
 }
 
+# Optional variables
 variable "attempt_deadline" {
   description = "The deadline for job attempts"
   type        = string
+  default     = "15s"
 }
 
 variable "retry_config" {
@@ -49,6 +51,37 @@ variable "retry_config" {
     max_backoff_duration = optional(string)
     max_doublings        = optional(number)
   })
+  default = {
+    retry_count = 0
+  }
+}
+
+variable "description" {
+  description = "A human-readable description for the job"
+  type        = string
+  default     = null
+}
+
+variable "time_zone" {
+  description = "Specifies the time zone to be used in interpreting schedule"
+  type        = string
+  default     = "UTC"
+}
+
+variable "paused" {
+  description = "Sets the job to a paused state"
+  type        = bool
+  default     = true
+}
+
+variable "pubsub_target" {
+  description = "Pub/Sub target If the job providers a Pub/Sub target the cron will publish a message to the provided topic"
+  type        = object({
+    topic_name = string
+    data       = optional(string)
+    attributes = optional(map(string), {})
+  })
+  default = null
 }
 
 variable "app_engine_http_target" {
@@ -67,35 +100,7 @@ variable "app_engine_http_target" {
           value = string
         }), null)
   })
-}
-
-# Optional variables
-variable "description" {
-  description = "A human-readable description for the job"
-  type        = string
-  default     = null
-}
-
-variable "time_zone" {
-  description = "Specifies the time zone to be used in interpreting schedule"
-  type        = string
-  default     = "UTC"
-}
-
-variable "paused" {
-  description = "Sets the job to a paused state"
-  type        = bool
-  default     = false
-}
-
-variable "pubsub_target" {
-  description = "Pub/Sub target If the job providers a Pub/Sub target the cron will publish a message to the provided topic"
-  type        = object({
-    topic_name = string
-    data       = optional(string)
-    attributes = optional(map(string), {})
-  })
-  default      = null
+  default = null
 }
 
 variable "http_target" {

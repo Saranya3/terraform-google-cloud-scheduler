@@ -1,4 +1,4 @@
-# Simple Cloud Scheduler Example
+# Cloud Scheduler job with PubSub Target Example
 
 This example demonstrates how to create a Google Cloud Scheduler job using the `terraform-google-cloud-scheduler` module.
 
