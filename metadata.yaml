@@ -22,14 +22,12 @@ spec:
   info:
     title: terraform-google-cloud-scheduler
     source:
-      repo: /usr/local/google/home/ssranya/terraform-google-cloud-scheduler/terraform-google-cloud-scheduler
+      repo: sso://ospo-internal/releasing/terraform-google-cloud-scheduler/terraform-google-cloud-scheduler
+      sourceType: git
     version: 0.0.1
     actuationTool:
       flavor: Terraform
       version: ">= 1.3"
-    description:
-      preDeploy: To deploy this blueprint you must have an active billing account and billing permissions.
-    icon: assets/icon.png
     costEstimate:
       description: Blueprint cost details
       url: https://cloud.google.com/products/calculator?id=02fb0c45-cc29-4567-8cc6-f72ac9024add
@@ -130,10 +128,8 @@ spec:
     outputs:
       - name: id
         description: An identifier for the resource
-        varType: string
       - name: state
         description: State of the job
-        varType: string
   requirements:
     roles:
       - level: Project
