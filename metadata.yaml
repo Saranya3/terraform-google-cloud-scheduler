@@ -95,9 +95,9 @@ spec:
         connections:
           - source:
               source: github.com/terraform-google-modules/terraform-google-pubsub
-              version: ~> 4.2
+              version: ~> 8.3.2
             spec:
-              outputExpr: topic_name
+              outputExpr: id
       - name: app_engine_http_target
         description: App Engine HTTP target. If the job providers a App Engine HTTP target the cron will send a request to the service instance
         varType: |-
