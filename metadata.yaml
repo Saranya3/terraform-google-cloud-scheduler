@@ -83,7 +83,7 @@ spec:
       - name: paused
         description: Sets the job to a paused state
         varType: bool
-        defaultValue: true
+        defaultValue: false
       - name: pubsub_target
         description: Pub/Sub target If the job providers a Pub/Sub target the cron will publish a message to the provided topic
         varType: |-
@@ -92,6 +92,12 @@ spec:
               data       = optional(string)
               attributes = optional(map(string), {})
             })
+        connections:
+          - source:
+              source: github.com/terraform-google-modules/terraform-google-pubsub
+              version: ~> 4.2
+            spec:
+              outputExpr: topic_name
       - name: app_engine_http_target
         description: App Engine HTTP target. If the job providers a App Engine HTTP target the cron will send a request to the service instance
         varType: |-
@@ -109,6 +115,7 @@ spec:
                     value = string
                   }), null)
             })
+        # TODO: Update the connections
       - name: http_target
         description: If the job providers a http_target the cron will send a request to the targeted url
         varType: |-

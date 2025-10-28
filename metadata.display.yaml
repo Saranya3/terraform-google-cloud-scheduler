@@ -22,8 +22,8 @@ spec:
   info:
     title: terraform-google-cloud-scheduler
     source:
-       repo: sso://ospo-internal/releasing/terraform-google-cloud-scheduler/terraform-google-cloud-scheduler
-       sourceType: git
+      repo: sso://ospo-internal/releasing/terraform-google-cloud-scheduler/terraform-google-cloud-scheduler
+      sourceType: git
   ui:
     input:
       variables:

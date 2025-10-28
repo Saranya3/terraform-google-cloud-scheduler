@@ -71,7 +71,7 @@ variable "time_zone" {
 variable "paused" {
   description = "Sets the job to a paused state"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "pubsub_target" {
